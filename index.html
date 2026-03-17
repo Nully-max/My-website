@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abdou Mj — Web & Game Dev</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #eeecea;
+    --surface2: #e5e3de;
+    --ink: #1a1916;
+    --ink2: #5a5852;
+    --ink3: #9a9890;
+    --accent: #2a2420;
+    --line: rgba(26,25,22,0.12);
+    --green: #3B6D11;
+    --green-bg: #EAF3DE;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* SECTIONS */
+  section { padding: 6rem 2.5rem; max-width: 900px; margin: 0 auto; }
+  section:first-of-type { padding-top: 7rem; }
+
+  /* LANDING */
+  #landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 56px;
+    max-width: none;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .landing-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .landing-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    border: 1px solid var(--line);
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 2.5rem;
+  }
+
+  h1.hero {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  h1.hero span {
+    color: var(--ink3);
+  }
+
+  .hero-bio {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--ink2);
+    max-width: 480px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.8; }
+
+  .btn-ghost {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ink2);
+    border: 1px solid var(--line);
+    padding: 12px 28px;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--ink2); color: var(--ink); }
+
+  .landing-footer-row {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--ink);
+  }
+
+  .stat-item .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-top: 2px;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 0.75rem;
+  }
+
+  h2.section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 0.875rem;
+    line-height: 1.9;
+    color: var(--ink2);
+    margin-bottom: 1rem;
+  }
+
+  .about-text strong { color: var(--ink); font-weight: 500; }
+
+  .about-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 0.875rem 1rem;
+    background: var(--surface);
+    border-radius: 4px;
+  }
+
+  .info-row .label {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  .info-row .value {
+    font-size: 0.8rem;
+    color: var(--ink);
+  }
+
+  .badge-jam {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    background: var(--green-bg);
+    color: var(--green);
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .skill-card {
+    background: var(--bg);
+    padding: 1.5rem;
+  }
+
+  .skill-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .skill-card-level {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 1rem;
+  }
+
+  .skill-bar-track {
+    height: 3px;
+    background: var(--surface2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: width 1s ease;
+  }
+
+  .skill-card-desc {
+    font-size: 0.75rem;
+    color: var(--ink2);
+    line-height: 1.6;
+    margin-top: 0.75rem;
+  }
+
+  /* LANGUAGES */
+  .lang-section-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 1rem;
+  }
+
+  .lang-grid {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .lang-pill {
+    font-size: 0.75rem;
+    padding: 6px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--surface);
+    color: var(--ink2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lang-pill .lang-level {
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink3);
+  }
+
+  /* PROJECTS */
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .project-row {
+    background: var(--bg);
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+    transition: background 0.15s;
+  }
+
+  .project-row:hover { background: var(--surface); }
+
+  .project-index {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--ink3);
+    padding-top: 2px;
+    min-width: 28px;
+  }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+
+  .project-desc {
+    font-size: 0.78rem;
+    color: var(--ink2);
+    line-height: 1.6;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    color: var(--ink3);
+  }
+
+  .tag.featured {
+    background: var(--green-bg);
+    color: var(--green);
+    border-color: transparent;
+  }
+
+  .project-type {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    white-space: nowrap;
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  details.faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  details.faq-item:last-child { border-bottom: none; }
+
+  details.faq-item summary {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  details.faq-item summary:hover { background: var(--surface); }
+  details.faq-item[open] summary { background: var(--surface); }
+
+  details.faq-item summary::after {
+    content: '+';
+    font-size: 1rem;
+    color: var(--ink3);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  details.faq-item[open] summary::after {
+    content: '−';
+  }
+
+  details.faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.82rem;
+    color: var(--ink2);
+    line-height: 1.9;
+    background: var(--surface);
+  }
+
+  .faq-answer a { color: var(--ink); }
+
+  /* CONTACT FOOTER */
+  #contact {
+    border-top: 1px solid var(--line);
+    max-width: none;
+    padding: 4rem 2.5rem;
+    background: var(--ink);
+  }
+
+  .contact-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .contact-left .contact-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1rem;
+  }
+
+  .contact-left h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .contact-email-link {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .contact-email-link:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+
+  .contact-right {
+    text-align: right;
+  }
+
+  .contact-right .footer-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 0.35rem;
+  }
+
+  .contact-right .footer-loc {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em;
+  }
+
+  /* SCROLL FADE-IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1.2rem; }
+    section { padding: 4rem 1.25rem; }
+    #landing { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-inner { flex-direction: column; align-items: flex-start; }
+    .contact-right { text-align: left; }
+    #contact { padding: 3rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#landing">Abdou Mj</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- LANDING -->
+<section id="landing">
+  <div class="landing-inner">
+    <div class="landing-tag">Available for work · Bizerte, Tunisia</div>
+    <h1 class="hero">
+      Web &amp;<br/>
+      Game<br/>
+      <span>Dev.</span>
+    </h1>
+    <p class="hero-bio">
+      Full websites with source code included, reliable maintenance support, and game dev on the side — crafted by a dedicated CS student ready to bring your ideas to life.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get in touch</a>
+    </div>
+    <div class="landing-footer-row">
+      <div class="stat-item">
+        <div class="stat-num">48th</div>
+        <div class="stat-label">Brackeys Game Jam 2024</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15K+</div>
+        <div class="stat-label">Submissions competed against</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years building</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label fade-in">01 — About</p>
+  <h2 class="section-title fade-in">The person<br/>behind the code.</h2>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>
+        I'm <strong>Abdou Mj</strong>, a Computer Science student from Bizerte, Tunisia, passionate about building things that run — whether that's a full-stack website or a game engine mechanic.
+      </p>
+      <p>
+        I do <strong>web development</strong> end-to-end: design, build, deploy, and maintain. Every project ships with its full source code. No black boxes.
+      </p>
+      <p>
+        On the game side, I work in <strong>Godot</strong>, ranging from fast-paced FPS prototypes to polished platformers. My platformer placed <strong>48th out of 15,000+ entries</strong> in the Brackeys Game Jam — one of the biggest indie jams in the world.
+      </p>
+      <p>
+        I also dabble in <strong>music production</strong> when I'm not in front of a code editor.
+      </p>
+    </div>
+    <div class="about-aside fade-in">
+      <div class="info-row">
+        <span class="label">Location</span>
+        <span class="value">Bizerte, Tunisia</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Status</span>
+        <span class="value">CS Student · Open to freelance</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Email</span>
+        <span class="value">abdouboners@gmail.com</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Game Engine</span>
+        <span class="value">Godot (Intermediate)</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Highlight</span>
+        <span class="value">
+          Brackeys Game Jam — Top 0.4%
+          <div><span class="badge-jam">48 / 15,000+ submissions</span></div>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label fade-in">02 — Skills</p>
+  <h2 class="section-title fade-in">What I bring<br/>to the table.</h2>
+
+  <div class="skills-grid fade-in">
+    <div class="skill-card">
+      <div class="skill-card-title">Web Development</div>
+      <div class="skill-card-level">Intermediate</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div>
+      <div class="skill-card-desc">Frontend &amp; backend, responsive layouts, full source code delivered. Prototypes for restaurants, cafes, portfolios, and personal sites.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Game Dev (Godot)</div>
+      <div class="skill-card-level">Intermediate</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div>
+      <div class="skill-card-desc">Platformers, FPS prototypes, and polished game mechanics. Proven in competitive game jams against thousands of entries.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Music Production</div>
+      <div class="skill-card-level">Beginner</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:20%"></div></div>
+      <div class="skill-card-desc">Learning the craft on the side. Useful for game audio and creative projects.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Project Delivery</div>
+      <div class="skill-card-level">Reliable</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+      <div class="skill-card-desc">Source code included with every project. Maintenance support provided. Dedicated, communicative, and deadline-aware.</div>
+    </div>
+  </div>
+
+  <p class="lang-section-title fade-in">Languages</p>
+  <div class="lang-grid fade-in">
+    <div class="lang-pill">Arabic <span class="lang-level">Native</span></div>
+    <div class="lang-pill">English <span class="lang-level">Very Fluent</span></div>
+    <div class="lang-pill">French <span class="lang-level">Basic</span></div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label fade-in">03 — Projects</p>
+  <h2 class="section-title fade-in">Things I've<br/>actually built.</h2>
+
+  <div class="projects-list fade-in">
+    <div class="project-row">
+      <div class="project-index">01</div>
+      <div>
+        <div class="project-name">Brackeys Jam Platformer</div>
+        <div class="project-desc">A polished 2D platformer built and submitted to the Brackeys Game Jam. Ranked 48th out of over 15,000 entries — placing in the top 0.4% globally.</div>
+        <div class="project-tags">
+          <span class="tag featured">Top 0.4% · Jam Entry</span>
+          <span class="tag">Godot</span>
+          <span class="tag">2D Platformer</span>
+        </div>
+      </div>
+      <div class="project-type">Game Dev</div>
+    </div>
+
+    <div class="project-row">
+      <div class="project-index">02</div>
+      <div>
+        <div class="project-name">FPS Prototype</div>
+        <div class="project-desc">First-person shooter prototype built in Godot. Focused on tight movement mechanics, shooting feel, and level flow.</div>
+        <div class="project-tags">
+          <span class="tag">Godot</span>
+          <span class="tag">FPS</span>
+          <span class="tag">3D</span>
+        </div>
+      </div>
+      <div class="project-type">Game Dev</div>
+    </div>
+
+    <div class="project-row">
+      <div class="project-index">03</div>
+      <div>
+        <div class="project-name">Game Prototypes Collection</div>
+        <div class="project-desc">Multiple game prototypes exploring different genres — additional platformer variants, experimental mechanics, and gameplay loops.</div>
+        <div class="project-tags">
+          <span class="tag">Godot</span>
+          <span class="tag">Multiple Genres</span>
+        </div>
+      </div>
+      <div class="project-type">Game Dev</div>
+    </div>
+
+    <div class="project-row">
+      <div class="project-index">04</div>
+      <div>
+        <div class="project-name">Restaurant &amp; Cafe Websites</div>
+        <div class="project-desc">Multiple web prototypes for restaurants and cafes — responsive design, clean layouts, and modern UI patterns tailored for small businesses.</div>
+        <div class="project-tags">
+          <span class="tag">Web Dev</span>
+          <span class="tag">Responsive</span>
+          <span class="tag">UI Design</span>
+        </div>
+      </div>
+      <div class="project-type">Web Dev</div>
+    </div>
+
+    <div class="project-row">
+      <div class="project-index">05</div>
+      <div>
+        <div class="project-name">Portfolio &amp; Personal Sites</div>
+        <div class="project-desc">Several portfolio and personal website builds. Clean, fast, and fully delivered with source code for client ownership.</div>
+        <div class="project-tags">
+          <span class="tag">Web Dev</span>
+          <span class="tag">Portfolio</span>
+          <span class="tag">Source Included</span>
+        </div>
+      </div>
+      <div class="project-type">Web Dev</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FAQ -->
+<section id="faq">
+  <p class="section-label fade-in">04 — FAQ</p>
+  <h2 class="section-title fade-in">Common<br/>questions.</h2>
+
+  <div class="faq-list fade-in">
+    <details class="faq-item">
+      <summary>Do you deliver the source code with the project?</summary>
+      <div class="faq-answer">Yes, always. Every web project and game project ships with its full, commented source code. You own what you paid for — no vendor lock-in, no hidden dependencies on me.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What kind of websites can you build?</summary>
+      <div class="faq-answer">Primarily business websites (restaurants, cafes, local services), personal portfolios, and landing pages. I handle the full stack — design, frontend, backend, and deployment. If you have a specific idea, reach out and we'll figure out if it's a fit.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Do you offer maintenance after launch?</summary>
+      <div class="faq-answer">Yes. I offer reliable post-launch maintenance support. Whether it's content updates, bug fixes, or small feature additions, I stay available after the project ships.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Can you make a game for my project or brand?</summary>
+      <div class="faq-answer">Potentially yes — depends on the scope. I work in Godot and can build 2D or 3D games. Casual games, jam-style games, browser games, and interactive experiences are all within reach. Let's talk about what you have in mind.</div>
+    </details>
+    <details class="faq-item">
+      <summary>How do we communicate during the project?</summary>
+      <div class="faq-answer">Primarily by email at <a href="mailto:abdouboners@gmail.com">abdouboners@gmail.com</a>. I'm also open to using Discord or whatever platform works best for you. I aim to respond within 24 hours.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Are you available for international clients?</summary>
+      <div class="faq-answer">Absolutely. I'm based in Bizerte, Tunisia, and I work with clients remotely. I'm very fluent in English, so communication is no barrier. Time zone differences are manageable with async communication.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What's your background?</summary>
+      <div class="faq-answer">I'm a CS student with hands-on experience in web development and game development. I placed 48th out of 15,000+ entries in the Brackeys Game Jam, one of the largest indie game jams in the world. I'm passionate about building real, working products — not just side projects that never ship.</div>
+    </details>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-top: 4rem; padding-bottom: 4rem;">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="contact-label">05 — Contact</div>
+      <h2>Let's build<br/>something.</h2>
+      <a class="contact-email-link" href="mailto:abdouboners@gmail.com">abdouboners@gmail.com</a>
+    </div>
+    <div class="contact-right">
+      <div class="footer-name">Abdou Mj</div>
+      <div class="footer-loc">Bizerte, Tunisia · 2025</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
